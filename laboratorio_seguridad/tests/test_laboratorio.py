@@ -17,12 +17,12 @@ class SeguridadExpedientes(unittest.TestCase):
         self.assertEqual(200, codigo)
         self.assertEqual(85, datos.get("nota"))
 
-    def test_rojo_estudiante_no_consulta_expediente_ajeno(self):
+    def test_estudiante_no_consulta_expediente_ajeno(self):
         codigo, datos = leer_expediente(self.estado, "lab-ana", "202")
         self.assertEqual(403, codigo)
         self.assertNotIn("nota", datos)
 
-    def test_rojo_sesion_revocada_no_permita_lecturas(self):
+    def test_sesion_revocada_no_permita_lecturas(self):
         codigo, _ = revocar_sesion(self.estado, "lab-ana")
         self.assertEqual(200, codigo)
         codigo, datos = leer_expediente(self.estado, "lab-ana", "101")
