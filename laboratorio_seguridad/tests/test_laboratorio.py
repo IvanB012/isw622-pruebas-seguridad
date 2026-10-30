@@ -58,18 +58,18 @@ class SeguridadExpedientes(unittest.TestCase):
         self.assertEqual(403, codigo)
         self.assertNotIn("nota", datos)
 
-    def test_sesion_revocada_no_permita_lecturas(self):
+    def test_rechaza_lectura_con_sesion_revocada(self):
         codigo, _ = revocar_sesion(self.estado, "lab-ana")
-        self.assertEqual(200, codigo)
+        self.assertEqual(200, codigo, "TC-04: la revocación de lab-ana debía responder 200")
         codigo, datos = leer_expediente(self.estado, "lab-ana", "101")
-        self.assertEqual(401, codigo)
-        self.assertNotIn("nota", datos)
+        self.assertEqual(401, codigo, "SEC-03/TC-04: lab-ana revocada debía recibir 401 al leer 101")
+        self.assertNotIn("nota", datos, "SEC-03/TC-04: la respuesta 401 no debe incluir la nota")
 
-    def test_sesion_expirada_no_permita_lecturas(self):
+    def test_rechaza_lectura_con_sesion_expirada(self):
         codigo, datos = leer_expediente(self.estado, "lab-vencida", "101")
 
-        self.assertEqual(401, codigo)
-        self.assertNotIn("nota", datos)
+        self.assertEqual(401, codigo, "SEC-03/TC-06: lab-vencida (expirada) debía recibir 401 al leer 101")
+        self.assertNotIn("nota", datos, "SEC-03/TC-06: la respuesta 401 no debe incluir la nota")
 
     def test_administrador_no_actualiza_notas(self):
         nota_original = self.estado["expedientes"]["101"]["nota"]
