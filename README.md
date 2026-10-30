@@ -82,6 +82,11 @@ TC-10 se evidencia dentro de la regresión global y en las pruebas unitarias. TC
 
 El requisito no pide un ciclo rojo-verde-refactor por cada caso. Los ciclos TDD documentados corresponden a los casos donde hubo un fallo inicial, una corrección mínima y una regresión posterior: TC-02, TC-03, TC-04, TC-05 y TC-07. TC-01, TC-06, TC-08, TC-09, TC-11 y TC-12 son casos de cobertura o regresión: su evidencia consiste en la salida aprobada y, cuando aplica, la captura de terminal. TC-10 queda cubierto por la regresión global de la suite.
 
+## Anexos de cierre
+
+- [`matriz_trazabilidad.csv`](matriz_trazabilidad.csv) relaciona los 12 casos del catálogo con los requisitos SEC, amenazas, oráculos, automatización, evidencia y estado final. También identifica PM-01 como prueba manual adicional y T6 como riesgo residual, sin contarlos como casos del catálogo.
+- [`hallazgos.csv`](hallazgos.csv) registra los cinco defectos confirmados, su corrección y evidencia de cierre. El registro `R-01` documenta T6 como riesgo residual: no es un defecto corregido ni altera la métrica de los 12 casos.
+
 ## Continuidad
 
-Para Fase D/E, Iván debe inspeccionar una política de acceso y dos casos, y ejecutar la suite usando solo este README. El registro listo para completar está en [`docs/Registro_Fases_D_E.md`](docs/Registro_Fases_D_E.md). Para Fase F, conservar la trazabilidad SEC–amenaza–caso–evidencia; distinguir defectos corregidos de T6, que permanece como riesgo residual.
+Para Fase D/E, Iván debe inspeccionar una política de acceso y dos casos, y ejecutar la suite usando solo este README. El acta y los resultados deben incorporarse en la documentación de Iván. Para Fase F, conservar la trazabilidad SEC–amenaza–caso–evidencia; distinguir defectos corregidos de T6, que permanece como riesgo residual.
