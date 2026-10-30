@@ -1,9 +1,0 @@
-test_docente_actualiza_nota_en_su_sede (test_laboratorio.SeguridadExpedientes.test_docente_actualiza_nota_en_su_sede) ... ok
-test_estudiante_consulta_expediente_propio (test_laboratorio.SeguridadExpedientes.test_estudiante_consulta_expediente_propio) ... ok
-test_estudiante_no_consulta_expediente_ajeno (test_laboratorio.SeguridadExpedientes.test_estudiante_no_consulta_expediente_ajeno) ... ok
-test_sesion_revocada_no_permita_lecturas (test_laboratorio.SeguridadExpedientes.test_sesion_revocada_no_permita_lecturas) ... ok
-
-----------------------------------------------------------------------
-Ran 4 tests in 0.000s
-
-OK
