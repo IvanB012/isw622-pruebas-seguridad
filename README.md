@@ -34,6 +34,8 @@ Los 12 casos están aprobados. PM-01 significa **Prueba Manual 01**: usa una not
 
 ## Ejecución reproducible
 
+**Requisitos:** Python 3.10 o superior. En Windows, si `python` responde "no se encontró Python", usá `py` (por ejemplo `py -m unittest discover -s tests -v`).
+
 Desde la raíz del repositorio:
 
 ```powershell
