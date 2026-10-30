@@ -1,6 +1,6 @@
 # Creación de Pruebas de Seguridad de Software — ISW-622
 
-Guía de relevo para Iván. La Fase A define requisitos SEC-01 a SEC-07 y amenazas T1 a T6; Ian ejecutó el trabajo técnico de Fases B y C.
+Laboratorio local de seguridad de expedientes académicos (Python, solo biblioteca estándar). Curso ISW-622 Pruebas de Software, UTN. Autores: Iván Barboza Blanco e Ian Angulo Matamoros. Versión 1.0. Material didáctico, no apto para producción: solo datos y credenciales sintéticos, solo en `127.0.0.1`. El informe completo está en `informe_seguridad.pdf`.
 
 ## Lectura rápida
 
@@ -34,7 +34,7 @@ Los 12 casos están aprobados. PM-01 significa **Prueba Manual 01**: usa una not
 
 ## Ejecución reproducible
 
-**Requisitos:** Python 3.10 o superior. En Windows, si `python` responde "no se encontró Python", usá `py` (por ejemplo `py -m unittest discover -s tests -v`).
+**Requisitos:** Python 3.10 o superior. En Windows, si `python` responde "no se encontró Python", usa `py` (por ejemplo `py -m unittest discover -s tests -v`).
 
 Desde la raíz del repositorio:
 
@@ -46,7 +46,7 @@ python -m unittest discover -s tests -v
 Remove-Item Env:PYTHONPATH
 ```
 
-La ejecución usa Python 3.14.6 y debe mostrar `Ran 14 tests` seguido de `OK`. Se conservaron dos ejecuciones limpias de 14 pruebas en `evidencias/regresion-suite-final/`: `01-regresion-14-pruebas` y `02-regresion-14-pruebas`, cada una con TXT y captura de terminal.
+Ejecución de referencia con Python 3.14.6 (también verificada con 3.13); debe mostrar `Ran 14 tests` seguido de `OK`. Se conservaron dos ejecuciones limpias de 14 pruebas en `evidencias/regresion-suite-final/`: `01-regresion-14-pruebas` y `02-regresion-14-pruebas`, cada una con TXT y captura de terminal.
 
 Para API manual:
 
@@ -56,6 +56,18 @@ python servidor.py
 ```
 
 La API queda en `http://127.0.0.1:8765`. Detener con `Ctrl+C`.
+
+## Instalación
+
+No hay paquetes que instalar. Basta con clonar el repositorio:
+
+`git clone https://github.com/IvanB012/isw622-pruebas-seguridad.git`
+
+## Restablecer datos sintéticos
+
+- Las pruebas `unittest` reinician el estado antes de cada caso.
+- El servidor guarda los datos solo en memoria. Para volver al estado inicial y reactivar sesiones revocadas, detenlo con `Ctrl+C` y ejecuta de nuevo `servidor.py`.
+- No hay archivos ni base de datos que borrar. Todos los datos y tokens (`lab-ana`, `lab-luis`, `lab-maria`, `lab-pedro`, `lab-admin`, `lab-vencida`) son sintéticos.
 
 ## Estructura de evidencias
 
@@ -87,8 +99,4 @@ El requisito no pide un ciclo rojo-verde-refactor por cada caso. Los ciclos TDD 
 ## Anexos de cierre
 
 - [`matriz_trazabilidad.csv`](matriz_trazabilidad.csv) relaciona los 12 casos del catálogo con los requisitos SEC, amenazas, oráculos, automatización, evidencia y estado final. También identifica PM-01 como prueba manual adicional y T6 como riesgo residual, sin contarlos como casos del catálogo.
-- [`hallazgos.csv`](hallazgos.csv) registra los cinco defectos confirmados, su corrección y evidencia de cierre. El registro `R-01` documenta T6 como riesgo residual: no es un defecto corregido ni altera la métrica de los 12 casos.
-
-## Continuidad
-
-Para Fase D/E, Iván debe inspeccionar una política de acceso y dos casos, y ejecutar la suite usando solo este README. El acta y los resultados deben incorporarse en la documentación de Iván. Para Fase F, conservar la trazabilidad SEC–amenaza–caso–evidencia; distinguir defectos corregidos de T6, que permanece como riesgo residual.
+- [`hallazgos.csv`](hallazgos.csv) registra los cinco defectos confirmados y corregidos (H-01 a H-05), tres observaciones de la inspección de Fase D que siguen abiertas (H-06 a H-08) y el riesgo residual T6 (`R-01`), que no es un defecto ni altera la métrica de los 12 casos.
