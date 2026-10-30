@@ -44,7 +44,7 @@ python -m unittest discover -s tests -v
 Remove-Item Env:PYTHONPATH
 ```
 
-La ejecución final usa Python 3.14.6 y debe mostrar `Ran 14 tests` seguido de `OK`.
+La ejecución usa Python 3.14.6 y debe mostrar `Ran 14 tests` seguido de `OK`. Se conservaron dos ejecuciones limpias de 14 pruebas en `evidencias/regresion-suite-final/`: `01-regresion-14-pruebas` y `02-regresion-14-pruebas`, cada una con TXT y captura de terminal.
 
 Para API manual:
 
@@ -71,11 +71,16 @@ Cada carpeta se nombra por el caso y, cuando corresponde, por el tipo de evidenc
 | `tc-09-docente-misma-sede/` | Salida y captura de TC-09. |
 | `tc-11-limite-inferior-valido/` | Salida y captura de TC-11. |
 | `tc-12-limite-superior-invalido/` | Salida y captura de TC-12. |
+| `tc-01-expediente-propio/` | Salida individual aprobada de TC-01; se agregará su captura de terminal. |
 | `integracion-api/` | Pruebas de integración HTTP de TC-03 y TC-05. |
 | `manual-api-postman/` | Capturas Postman de TC-03, TC-05, TC-04 y PM-01. |
-| `regresion-suite-final/` | Salida de regresión completa; agregar aquí la captura que muestre las 14 pruebas. |
+| `regresion-suite-final/` | Salida y captura de la regresión completa de 14 pruebas. |
 
-TC-01 y TC-10 se evidencian dentro de la regresión global y en las pruebas unitarias; no se creó una carpeta individual para cada uno.
+TC-10 se evidencia dentro de la regresión global y en las pruebas unitarias. TC-01 dispone de salida individual y se conserva también en la regresión global.
+
+## Alcance TDD y evidencia individual
+
+El requisito no pide un ciclo rojo-verde-refactor por cada caso. Los ciclos TDD documentados corresponden a los casos donde hubo un fallo inicial, una corrección mínima y una regresión posterior: TC-02, TC-03, TC-04, TC-05 y TC-07. TC-01, TC-06, TC-08, TC-09, TC-11 y TC-12 son casos de cobertura o regresión: su evidencia consiste en la salida aprobada y, cuando aplica, la captura de terminal. TC-10 queda cubierto por la regresión global de la suite.
 
 ## Continuidad
 
