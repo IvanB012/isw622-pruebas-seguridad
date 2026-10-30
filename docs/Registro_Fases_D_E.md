@@ -22,6 +22,7 @@ Este registro debe completarse con resultados observados. Ninguna observación, 
 2. Confirma que cada oráculo comprueba tanto el código HTTP como la ausencia de cambio indebido en los datos cuando corresponde.
 3. Registra al menos tres observaciones verificables o oportunidades de mejora. No se deben declarar vulnerabilidades sin evidencia reproducible.
 4. Ian implementa únicamente las acciones aceptadas y ejecuta la regresión posterior.
+5. Al menos una observación se valida mediante una prueba independiente que comprueba el efecto sobre los datos, no depende de otra prueba y falla cuando el control deja de cumplirse.
 
 ### Observaciones del revisor
 
@@ -37,7 +38,10 @@ Este registro debe completarse con resultados observados. Ninguna observación, 
 |---|---|
 | Observación seleccionada | Pendiente |
 | Prueba creada o ejecutada | Pendiente |
+| Datos antes de ejecutar la prueba | Pendiente |
+| Condición de control evaluada | Pendiente |
 | Efecto controlado sobre datos | Pendiente |
+| Condición que debe hacer fallar la prueba | Pendiente |
 | Resultado esperado | Pendiente |
 | Resultado obtenido | Pendiente |
 | Evidencia | Pendiente |
@@ -70,11 +74,13 @@ El ejecutor debe seguir únicamente el apartado **Ejecución reproducible** del 
 
 ### Ajustes para mantenimiento y diagnóstico
 
-| ID | Cambio propuesto por el ejecutor | Cambio aplicado por Ian | Prueba de regresión | Estado |
-|---|---|---|---|---|
-| E-MEJ-01 | Pendiente | Pendiente | Pendiente | Pendiente |
-| E-MEJ-02 | Pendiente | Pendiente | Pendiente | Pendiente |
+La rúbrica exige ajustar **nombres, datos o mensajes de error de al menos dos pruebas** para facilitar el mantenimiento y el diagnóstico. Los ajustes deben ser reales, trazables a la ejecución independiente o al análisis de usabilidad y verificarse por regresión.
+
+| ID | Prueba afectada | Tipo de ajuste: nombre, dato o mensaje | Situación anterior | Ajuste aplicado por Ian | Motivo y vínculo con D/E | Prueba de regresión | Estado |
+|---|---|---|---|---|---|---|---|
+| E-AJ-01 | Pendiente | Pendiente | Pendiente | Pendiente | Pendiente | Pendiente | Pendiente |
+| E-AJ-02 | Pendiente | Pendiente | Pendiente | Pendiente | Pendiente | Pendiente | Pendiente |
 
 ## Criterio de cierre
 
-La Fase D se cierra cuando existen tres observaciones verificables, su clasificación, la acción correspondiente y una prueba independiente documentada. La Fase E se cierra cuando un compañero ejecuta la suite usando únicamente el README, valora los dos escenarios de usabilidad y se documentan al menos dos ajustes reales o se justifica de forma verificable que no fue necesario cambiar alguno de ellos. Después de ambos cierres, se actualiza la Fase F con los resultados finales.
+La Fase D se cierra cuando existen tres observaciones verificables, su clasificación, la acción correspondiente y una prueba independiente documentada. La Fase E se cierra cuando un compañero ejecuta la suite usando únicamente el README, valora los dos escenarios de usabilidad sin divulgar información privada y se documentan dos ajustes reales en pruebas. Después de ambos cierres, se actualiza la Fase F con los resultados finales.
