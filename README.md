@@ -71,7 +71,7 @@ Cada carpeta se nombra por el caso y, cuando corresponde, por el tipo de evidenc
 | `tc-09-docente-misma-sede/` | Salida y captura de TC-09. |
 | `tc-11-limite-inferior-valido/` | Salida y captura de TC-11. |
 | `tc-12-limite-superior-invalido/` | Salida y captura de TC-12. |
-| `tc-01-expediente-propio/` | Salida individual aprobada de TC-01; se agregará su captura de terminal. |
+| `tc-01-expediente-propio/` | Salida y captura individual aprobada de TC-01. |
 | `integracion-api/` | Pruebas de integración HTTP de TC-03 y TC-05. |
 | `manual-api-postman/` | Capturas Postman de TC-03, TC-05, TC-04 y PM-01. |
 | `regresion-suite-final/` | Salida y captura de la regresión completa de 14 pruebas. |
@@ -84,4 +84,4 @@ El requisito no pide un ciclo rojo-verde-refactor por cada caso. Los ciclos TDD 
 
 ## Continuidad
 
-Para Fase D/E, Iván debe inspeccionar una política de acceso y dos casos, y ejecutar la suite usando solo este README. Para Fase F, conservar la trazabilidad SEC–amenaza–caso–evidencia; distinguir defectos corregidos de T6, que permanece como riesgo residual.
+Para Fase D/E, Iván debe inspeccionar una política de acceso y dos casos, y ejecutar la suite usando solo este README. El registro listo para completar está en [`docs/Registro_Fases_D_E.md`](docs/Registro_Fases_D_E.md). Para Fase F, conservar la trazabilidad SEC–amenaza–caso–evidencia; distinguir defectos corregidos de T6, que permanece como riesgo residual.
