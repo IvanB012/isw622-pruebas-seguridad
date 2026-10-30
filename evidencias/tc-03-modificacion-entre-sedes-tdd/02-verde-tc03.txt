@@ -1,0 +1,6 @@
+test_docente_no_actualiza_nota_de_otra_sede (test_laboratorio.SeguridadExpedientes.test_docente_no_actualiza_nota_de_otra_sede) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+OK

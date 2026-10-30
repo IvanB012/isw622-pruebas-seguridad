@@ -1,0 +1,15 @@
+test_auditoria_no_expone_token_y_registra_timestamp (test_laboratorio.SeguridadExpedientes.test_auditoria_no_expone_token_y_registra_timestamp) ... ERROR
+
+======================================================================
+ERROR: test_auditoria_no_expone_token_y_registra_timestamp (test_laboratorio.SeguridadExpedientes.test_auditoria_no_expone_token_y_registra_timestamp)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\ian20\OneDrive\Documents\Pruebas de software-Tarea\isw622-pruebas-seguridad\laboratorio_seguridad\tests\test_laboratorio.py", line 69, in test_auditoria_no_expone_token_y_registra_timestamp
+    self.assertEqual("ana", registro["actor"])
+                            ~~~~~~~~^^^^^^^^^
+KeyError: 'actor'
+
+----------------------------------------------------------------------
+Ran 1 test in 0.002s
+
+FAILED (errors=1)

@@ -1,0 +1,9 @@
+test_api_docente_no_actualiza_nota_de_otra_sede (test_api.IntegracionApiSeguridad.test_api_docente_no_actualiza_nota_de_otra_sede) ... ok
+test_api_rechaza_nota_fuera_de_rango (test_api.IntegracionApiSeguridad.test_api_rechaza_nota_fuera_de_rango) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 1.026s
+
+OK
+[LAB] "POST /expedientes/202/nota HTTP/1.1" 403 -
+[LAB] "POST /expedientes/101/nota HTTP/1.1" 400 -

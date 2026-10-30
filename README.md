@@ -1,50 +1,102 @@
 # Creación de Pruebas de Seguridad de Software — ISW-622
 
-Tarea en equipo: **Iván Barboza Blanco** (Fase A y Fase F) y **Ian Angulo Matamoros** (Fases B, C, D y E).
-Unidad IV, Pruebas de Software (UTN). 100 puntos.
+Laboratorio local de seguridad de expedientes académicos (Python, solo biblioteca estándar). Curso ISW-622 Pruebas de Software, UTN. Autores: Iván Barboza Blanco e Ian Angulo Matamoros. Versión 1.0. Material didáctico, no apto para producción: solo datos y credenciales sintéticos, solo en `127.0.0.1`. El informe completo está en `informe_seguridad.pdf`.
 
-## Estructura del repositorio
+## Lectura rápida
 
-```
-.
-├── informe_seguridad.pdf           # Informe final (se agrega al cierre, Fase F)
-├── laboratorio_seguridad/          # Código base del profesor + correcciones del equipo
-│   ├── README.md
-│   ├── servidor.py
-│   ├── src/
-│   │   ├── __init__.py
-│   │   └── lab.py
-│   └── tests/
-│       └── test_laboratorio.py
-├── documentacion/
-│   └── Fase_A_Requisitos_Amenazas_Trazabilidad.docx
-├── evidencias/                     # Capturas rojo-verde-refactor y pruebas manuales (Ian, Fase C)
-├── matriz_trazabilidad.csv         # SEC - Riesgo - TC - evidencia esperada
-└── hallazgos.csv                   # Bitácora de hallazgos (se llena en Fase F)
-```
+- **12 casos de prueba de seguridad:** TC-01 a TC-12; 3 positivos, 6 negativos y 3 de frontera.
+- **14 pruebas automatizadas:** 12 unitarias, una por cada caso, más 2 pruebas de integración HTTP que vuelven a validar TC-03 y TC-05 a través de la API.
+- **Resultado final:** 14 pruebas aprobadas, sin fallos.
+- **Pruebas manuales:** cuatro escenarios API con cinco solicitudes Postman: TC-03, TC-05, TC-04 (dos pasos) y PM-01.
 
-## Cómo ejecutar el laboratorio
+## Trazabilidad Fase A
 
-Desde `laboratorio_seguridad/`:
+| SEC | Amenaza | Casos |
+|---|---|---|
+| SEC-01 | T1 acceso horizontal | TC-01, TC-02 |
+| SEC-02 | T2 modificación entre sedes | TC-03, TC-09, TC-10 |
+| SEC-03 | T3 sesión inválida | TC-04, TC-06 |
+| SEC-04 y SEC-05 | T4 validación e integridad | TC-05, TC-11, TC-12, PM-01 |
+| SEC-06 | T5 auditoría | TC-07 |
+| SEC-07 | autorización por rol | TC-08 |
+| Riesgo residual | T6 fuerza bruta | Fuera de alcance; transferir a Fase F |
 
-```bash
+Los 12 casos están aprobados. PM-01 significa **Prueba Manual 01**: usa una nota no numérica y no se llama TC-11 porque TC-11 valida el valor numérico `0`.
+
+## Dónde está el código
+
+| Archivo | Contenido |
+|---|---|
+| `laboratorio_seguridad/src/lab.py` | Reglas de autenticación, sesiones, autorización por rol/sede, validación de nota y auditoría. |
+| `laboratorio_seguridad/tests/test_laboratorio.py` | Las **12 pruebas unitarias**, una por cada TC. |
+| `laboratorio_seguridad/tests/test_api.py` | Las **2 pruebas de integración HTTP** para TC-03 y TC-05. |
+| `laboratorio_seguridad/servidor.py` | API local utilizada por integración y Postman. |
+
+## Ejecución reproducible
+
+**Requisitos:** Python 3.10 o superior. En Windows, si `python` responde "no se encontró Python", usa `py` (por ejemplo `py -m unittest discover -s tests -v`).
+
+Desde la raíz del repositorio:
+
+```powershell
+Set-Location ".\laboratorio_seguridad"
+$env:PYTHONPATH = "."
+python --version
 python -m unittest discover -s tests -v
-python servidor.py   # en otra terminal
-curl http://127.0.0.1:8765/health
+Remove-Item Env:PYTHONPATH
 ```
 
-Ver `laboratorio_seguridad/README.md` para detalles de tokens, roles y peticiones de ejemplo.
+Ejecución de referencia con Python 3.14.6 (también verificada con 3.13); debe mostrar `Ran 14 tests` seguido de `OK`. Se conservaron dos ejecuciones limpias de 14 pruebas en `evidencias/regresion-suite-final/`: `01-regresion-14-pruebas` y `02-regresion-14-pruebas`, cada una con TXT y captura de terminal.
 
-## Flujo de trabajo
+Para API manual:
 
-- Rama `main`: estado integrado y entregable.
-- Rama `ivan`: documentación y análisis (Fase A y Fase F).
-- Rama `ian`: código, pruebas TDD y correcciones (Fases B, C, D, E).
-- Los cambios se integran a `main` por Pull Request, que sirve también como evidencia de la inspección cruzada (Fase D).
+```powershell
+$env:PYTHONPATH = "."
+python servidor.py
+```
 
-## Avance
+La API queda en `http://127.0.0.1:8765`. Detener con `Ctrl+C`.
 
-- [x] Fase A — Requisitos, amenazas y trazabilidad (Iván)
-- [ ] Fase B/C — Diseño de casos, TDD y ejecución (Ian)
-- [ ] Fase D/E — Revisión e inspección, usabilidad (Ian + Iván)
-- [ ] Fase F — Resultados y dictamen (Iván)
+## Instalación
+
+No hay paquetes que instalar. Basta con clonar el repositorio:
+
+`git clone https://github.com/IvanB012/isw622-pruebas-seguridad.git`
+
+## Restablecer datos sintéticos
+
+- Las pruebas `unittest` reinician el estado antes de cada caso.
+- El servidor guarda los datos solo en memoria. Para volver al estado inicial y reactivar sesiones revocadas, detenlo con `Ctrl+C` y ejecuta de nuevo `servidor.py`.
+- No hay archivos ni base de datos que borrar. Todos los datos y tokens (`lab-ana`, `lab-luis`, `lab-maria`, `lab-pedro`, `lab-admin`, `lab-vencida`) son sintéticos.
+
+## Estructura de evidencias
+
+Cada carpeta se nombra por el caso y, cuando corresponde, por el tipo de evidencia. Varios archivos para un mismo caso son normales: pueden corresponder a rojo, verde, refactor, salida textual, captura terminal o captura Postman.
+
+| Carpeta | Contenido |
+|---|---|
+| `tc-02-acceso-horizontal-tdd/` | Ciclo rojo-verde-refactor de TC-02. |
+| `tc-03-modificacion-entre-sedes-tdd/` | Ciclo TDD de TC-03. |
+| `tc-04-sesion-revocada-tdd/` | Ciclo TDD de TC-04. |
+| `tc-05-nota-fuera-rango/` | Evidencia de frontera TC-05. |
+| `tc-06-sesion-expirada/` | Ejecución de TC-06. |
+| `tc-07-auditoria-segura-tdd/` | Hallazgo SEC-06, corrección, verde y regresión. |
+| `tc-08-administrador-sin-modificacion/` | Ejecución de TC-08. |
+| `tc-09-docente-misma-sede/` | Salida y captura de TC-09. |
+| `tc-11-limite-inferior-valido/` | Salida y captura de TC-11. |
+| `tc-12-limite-superior-invalido/` | Salida y captura de TC-12. |
+| `tc-01-expediente-propio/` | Salida y captura individual aprobada de TC-01. |
+| `integracion-api/` | Pruebas de integración HTTP de TC-03 y TC-05. |
+| `manual-api-postman/` | Capturas Postman de TC-03, TC-05, TC-04 y PM-01. |
+| `regresion-suite-final/` | Salida y captura de la regresión completa de 14 pruebas. |
+
+TC-10 se evidencia dentro de la regresión global y en las pruebas unitarias. TC-01 dispone de salida individual y se conserva también en la regresión global.
+
+## Alcance TDD y evidencia individual
+
+El requisito no pide un ciclo rojo-verde-refactor por cada caso. Los ciclos TDD documentados corresponden a los casos donde hubo un fallo inicial, una corrección mínima y una regresión posterior: TC-02, TC-03, TC-04, TC-05 y TC-07. TC-01, TC-06, TC-08, TC-09, TC-11 y TC-12 son casos de cobertura o regresión: su evidencia consiste en la salida aprobada y, cuando aplica, la captura de terminal. TC-10 queda cubierto por la regresión global de la suite.
+
+## Anexos de cierre
+
+- [`matriz_trazabilidad.csv`](matriz_trazabilidad.csv) relaciona los 12 casos del catálogo con los requisitos SEC, amenazas, oráculos, automatización, evidencia y estado final. También identifica PM-01 como prueba manual adicional y T6 como riesgo residual, sin contarlos como casos del catálogo.
+- [`hallazgos.csv`](hallazgos.csv) registra los cinco defectos confirmados y corregidos (H-01 a H-05), tres observaciones de la inspección de Fase D que siguen abiertas (H-06 a H-08) y el riesgo residual T6 (`R-01`), que no es un defecto ni altera la métrica de los 12 casos.
