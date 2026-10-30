@@ -1,0 +1,6 @@
+test_administrador_no_actualiza_notas (test_laboratorio.SeguridadExpedientes.test_administrador_no_actualiza_notas) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+OK

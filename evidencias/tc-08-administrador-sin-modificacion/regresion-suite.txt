@@ -1,0 +1,13 @@
+test_administrador_no_actualiza_notas (test_laboratorio.SeguridadExpedientes.test_administrador_no_actualiza_notas) ... ok
+test_docente_actualiza_nota_en_su_sede (test_laboratorio.SeguridadExpedientes.test_docente_actualiza_nota_en_su_sede) ... ok
+test_docente_no_actualiza_nota_de_otra_sede (test_laboratorio.SeguridadExpedientes.test_docente_no_actualiza_nota_de_otra_sede) ... ok
+test_estudiante_consulta_expediente_propio (test_laboratorio.SeguridadExpedientes.test_estudiante_consulta_expediente_propio) ... ok
+test_estudiante_no_consulta_expediente_ajeno (test_laboratorio.SeguridadExpedientes.test_estudiante_no_consulta_expediente_ajeno) ... ok
+test_rechaza_nota_fuera_de_rango (test_laboratorio.SeguridadExpedientes.test_rechaza_nota_fuera_de_rango) ... ok
+test_sesion_expirada_no_permita_lecturas (test_laboratorio.SeguridadExpedientes.test_sesion_expirada_no_permita_lecturas) ... ok
+test_sesion_revocada_no_permita_lecturas (test_laboratorio.SeguridadExpedientes.test_sesion_revocada_no_permita_lecturas) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.000s
+
+OK

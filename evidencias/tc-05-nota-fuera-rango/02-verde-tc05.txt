@@ -1,0 +1,6 @@
+test_rechaza_nota_fuera_de_rango (test_laboratorio.SeguridadExpedientes.test_rechaza_nota_fuera_de_rango) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+OK

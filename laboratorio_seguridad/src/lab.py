@@ -2,6 +2,7 @@
 
 No se debe reutilizar este código en producción. No realiza autenticación real.
 """
+from datetime import datetime, timezone
 
 USUARIOS = {
     "ana": {"id": "ana", "rol": "estudiante", "sede": "Central"},
@@ -37,6 +38,18 @@ def autenticar(estado, token):
     return USUARIOS[sesion["usuario"]]
 
 
+def registrar_auditoria(estado, accion, usuario, expediente_id):
+    """Registra el evento sin persistir secretos de sesión."""
+    estado["auditoria"].append(
+        {
+            "accion": accion,
+            "actor": usuario["id"],
+            "id": expediente_id,
+            "timestamp": datetime.now(timezone.utc).isoformat(),
+        }
+    )
+
+
 def leer_expediente(estado, token, expediente_id):
     usuario = autenticar(estado, token)
     if usuario is None:
@@ -49,7 +62,9 @@ def leer_expediente(estado, token, expediente_id):
         and expediente["estudiante"] != usuario["id"]
     ):
         return 403, {"error": "Acceso denegado"}
-    estado["auditoria"].append({"accion": "lectura", "token": token, "id": expediente_id})
+    if usuario["rol"] == "docente" and usuario["sede"] != expediente["sede"]:
+        return 403, {"error": "Acceso denegado"}
+    registrar_auditoria(estado, "lectura", usuario, expediente_id)
     return 200, dict(expediente)
 
 
@@ -62,11 +77,12 @@ def actualizar_nota(estado, token, expediente_id, nota):
         return 404, {"error": "No existe"}
     if usuario["rol"] != "docente":
         return 403, {"error": "Operación denegada"}
-    if not isinstance(nota, (int, float)):
+    if usuario["sede"] != expediente["sede"]:
+        return 403, {"error": "Operación denegada"}
+    if not isinstance(nota, (int, float)) or not 0 <= nota <= 100:
         return 400, {"error": "Nota inválida"}
-    # TODO SEC-02/SEC-04: inspeccionar la sede y los valores de frontera.
     expediente["nota"] = nota
-    estado["auditoria"].append({"accion": "actualizacion", "token": token, "id": expediente_id})
+    registrar_auditoria(estado, "actualizacion", usuario, expediente_id)
     return 200, dict(expediente)
 
 
